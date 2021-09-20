@@ -15,6 +15,8 @@ const MONGO_SERVER = process.env.MONGO_SERVER
 const {
   Bookscontroller,
   getBooksController,
+  AddBookController,
+  deleteBookController,
 } = require("./controllers/Books.Controller")
 const PORT = process.env.PORT
 mongoose.connect(`${MONGO_SERVER}/BookStore`, {
@@ -24,6 +26,8 @@ mongoose.connect(`${MONGO_SERVER}/BookStore`, {
 
 app.get("/books", Bookscontroller)
 app.get("/find-author", getBooksController)
+app.post("/add-book", AddBookController)
+app.delete("/delete-book/:id", deleteBookController)
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`)
