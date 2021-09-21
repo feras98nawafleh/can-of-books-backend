@@ -8,7 +8,7 @@ let Bookscontroller = (req, res) => {
   })
 }
 
-let getBooksController = (req, res) => {
+let getBookController = (req, res) => {
   let authorId = req.query.id
   AuthorModel.findOne({ _id: authorId }).then((data) => {
     res.json(data)
@@ -38,9 +38,24 @@ const deleteBookController = (req, res) => {
   })
 }
 
+const updateBookController = async (req, res) => {
+  let bookId = req.params.id
+  let updatedBook = req.body
+  BooksModel.findOne({ _id: bookId }).then((book) => {
+    book.title = updatedBook.title
+    book.description = updatedBook.description
+    book.status = updatedBook.status
+    book.email = updatedBook.email
+    book.save()
+  })
+  let updatedList = await BooksModel.find()
+  await res.status(200).send(updatedList)
+}
+
 module.exports = {
   Bookscontroller,
-  getBooksController,
+  getBookController,
   AddBookController,
   deleteBookController,
+  updateBookController,
 }
