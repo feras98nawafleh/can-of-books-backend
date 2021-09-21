@@ -1,49 +1,42 @@
 "use strict"
 const mongoose = require("mongoose")
-const { bookSchema } = require("./Book.Model")
 
-const AuthorSchema = new mongoose.Schema({
-  name: String,
-  books: [bookSchema],
+const authorSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  status: String,
+  email: String,
 })
 
-const AuthorModel = mongoose.model("author", AuthorSchema)
+const AuthorModel = mongoose.model("author", authorSchema)
 
-let seedAuthorBooks = () => {
-  let bookList = [
-    {
-      title: "War and Peace",
-      description:
-        "War and Peace is a literary work mixed with chapters on history and philosophy by the Russian author Leo Tolstoy, first published serially, then published in its entirety in 1869. It is regarded as one of Tolstoy's finest literary achievements and remains an internationally praised classic of world literature.",
-      status:
-        "“Nothing is so necessary for a young man as the company of intelligent women.”",
-      email: "book@sorce.com",
-    },
-    {
-      title: "Song of Solomon",
-      description:
-        "Song of Solomon is a 1977 novel by American author Toni Morrison, her third to be published. It follows the life of Macon 'Milkman' Dead III, an African-American man living in Michigan, from birth to adulthood.",
-      status:
-        "“You wanna fly, you got to give up the shit that weighs you down.”",
-      email: "book@sorce.com",
-    },
-    {
-      title: "Ulysses",
-      description:
-        "Ulysses is a modernist novel by Irish writer James Joyce. It was first serialized in parts in the American journal The Little Review from March 1918 to December 1920 and then published in its entirety in Paris by Sylvia Beach on 2 February 1922, Joyce's 40th birthday.",
-      status:
-        "“Think you're escaping and run into yourself. Longest way round is the shortest way home.”",
-      email: "book@sorce.com",
-    },
-  ]
-  let newAuthor = new AuthorModel({
-    name: "Feras Nawafleh",
-    books: bookList,
+let seedAuthor = () => {
+  let newAuthor1 = new AuthorModel({
+    title: "The Great Gatsby",
+    description:
+      "Published in 1925, Fitzgerald’s The Great Gatsby explores the decadence of the Jazz Age, and one man’s introduction into a world where even those with the most indulgent lives cannot earn love.",
+    status: "Available",
+    email: "xxxxxx@gmail.com",
   })
-  newAuthor.save()
+  let newAuthor2 = new AuthorModel({
+    title: "Pride and Prejudice",
+    description:
+      "One of the most famous novels of all time, Pride And Prejudice details the courtship of two opposed characters in a world where manners and courtesy are of the utmost importance.",
+    status: "Available",
+    email: "ooooo@gmail.com",
+  })
+
+  let newAuthor3 = new AuthorModel({
+    title: "To Kill a Mockingbird",
+    description:
+      "Published in 1960, this timeless classic explores human behaviour and the collective conscience of The Deep South in the early 20th century.",
+    status: "Available",
+    email: "sanaishaqat@gmail.com",
+  })
+
+  newAuthor1.save()
+  newAuthor2.save()
+  newAuthor3.save()
 }
 
-module.exports = {
-  seedAuthorBooks,
-  AuthorModel,
-}
+module.exports = { seedAuthor, AuthorModel }
